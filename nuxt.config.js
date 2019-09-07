@@ -16,6 +16,16 @@ module.exports = {
     ]
   },
   /*
+    ** Global CSS
+    */
+  css: [
+    'element-ui/lib/theme-chalk/reset.css',
+    'element-ui/lib/theme-chalk/index.css'
+  ],
+  plugins: [
+    '@/plugins/element-ui'
+  ],
+  /*
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },

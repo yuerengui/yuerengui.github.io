@@ -16,9 +16,7 @@ export const mutations = {
 }
 
 export const actions = {
-  LOAD_ENTRIES({
-    commit
-  }) {
+  LOAD_ENTRIES({ commit }) {
     const entries = entriesData.entries;
     commit('setEntries', entries);
   },
