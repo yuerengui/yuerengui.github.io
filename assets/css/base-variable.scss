@@ -7,9 +7,6 @@ $articleFontSize: 16px;
 @mixin transition {
   transition: all .2s ease-in-out;
 }
-@mixin shadowType {
-  box-shadow: 0 0 15px rgba(68, 62, 62, 0.2);
-}
 @mixin responseWidth {
   @media screen  and (max-width: 767px){
     width: 100%;

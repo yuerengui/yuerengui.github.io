@@ -6,11 +6,11 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setPosts(state, data) {
-    state.posts = data;
+  setPosts(state, posts) {
+    state.posts = posts;
   },
-  setPost(state, name) {
-    state.post = name;
+  setPost(state, post) {
+    state.post = post;
   }
 }
 
@@ -19,7 +19,8 @@ export const actions = {
     const posts = metadata.posts;
     commit('setPosts', posts);
   },
-  LOAD_POST({ commit }, postName) {
-    commit('setPost', postName);
+  LOAD_POST({ commit }, slug) {
+    const post = metadata.posts.filter((post) => post.slug === slug)[0]
+    commit('setPost', post);
   }
 }

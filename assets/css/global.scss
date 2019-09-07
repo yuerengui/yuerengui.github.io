@@ -1,4 +1,4 @@
-@import './iconfont.scss';
+@import './base-variable.scss';
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -20,4 +20,10 @@ ol,
 ul {
   list-style: none
 }
-
+.el-container{
+  min-height: 100vh;
+}
+.el-main{
+  @include responseWidth;
+  margin: 0 auto;
+}
