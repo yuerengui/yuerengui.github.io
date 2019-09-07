@@ -1,26 +1,24 @@
 <template>
-  <client-only>
-    <el-container direction="vertical">
-      <custom-header></custom-header>
-      <el-main>
-        <nuxt-link tag="div" class="nuxt-link" :to="'/posts/'+post.id" :key="post.id" v-for="post in posts">
-            <h2 class="article-title">{{post.title}}</h2>
-            <div class="content-item">
-                <p class="description">{{post.description}}</p>
-            </div>
-            <p class="bottom">
-              <span class="time">
-                <i class="el-icon-date"></i>
-                {{post.createdAt}}
-              </span>
-              <el-tag v-for="(tag, index) in post.tags" :key="index" size='mini'>{{tag}}</el-tag>
-            </p>
-        </nuxt-link>
-      </el-main>
-      <custom-footer></custom-footer>
-      <el-backtop></el-backtop>
-    </el-container>
-  </client-only>
+  <el-container direction="vertical">
+    <custom-header></custom-header>
+    <el-main>
+      <nuxt-link tag="div" class="nuxt-link" :to="'/posts/'+post.id" :key="post.id" v-for="post in posts">
+          <h2 class="article-title">{{post.title}}</h2>
+          <div class="content-item">
+              <p class="description">{{post.description}}</p>
+          </div>
+          <p class="bottom">
+            <span class="time">
+              <i class="el-icon-date"></i>
+              {{post.createdAt}}
+            </span>
+            <el-tag v-for="(tag, index) in post.tags" :key="index" size='mini'>{{tag}}</el-tag>
+          </p>
+      </nuxt-link>
+    </el-main>
+    <custom-footer></custom-footer>
+    <el-backtop></el-backtop>
+  </el-container>
 </template>
 <script>
 import customHeader from "~/components/header/header";
