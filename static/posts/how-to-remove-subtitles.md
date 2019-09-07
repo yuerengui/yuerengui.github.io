@@ -14,6 +14,7 @@
 # 最后根据自己的播放器和视频慢慢微调就可以了
 ```
 
+<more></more>
 
 > 参考
 [MPlayer Documentation](http://www.mplayer.org.cn/help_zh.html#%E8%A7%86%E9%A2%91%E6%BB%A4%E9%95%9C)

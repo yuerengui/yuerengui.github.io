@@ -4,14 +4,12 @@
       "id": "macos-install-lnmp",
       "title": "macOS安装 LNMP 环境",
       "createdAt": "2017-05-24 13:38:23",
-      "description": "macOS环境安装详解",
       "tags": ["mac", "lnmp"]
-    }, 
+    },
     {
       "id": "how-to-remove-subtitles",
       "title": "如何去除电影内置字幕",
       "createdAt": "2017-07-05 08:53:31",
-      "description": "看美剧学英语之必备技能",
       "tags": ["MplayerX", "mac"]
     }]
 }

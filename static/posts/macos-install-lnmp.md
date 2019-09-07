@@ -4,6 +4,8 @@
 
 # 开始安装
 
+<more></more>
+
 ## 安装Mysql
 
 ```bash

@@ -1,4 +1,5 @@
 import metadata from './static/metadata.json';
+const webpack = require('webpack')
 
 module.exports = {
   /*
@@ -12,29 +13,27 @@ module.exports = {
       { hid: 'description', name: 'description', content: '平时码字记录技术的小角落' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css'
-      }
-    ],
-    script: [{
-      src: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js'
-    }],
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ]
   },
   /*
     ** Global CSS
     */
   css: [
+    '@/assets/css/global.scss',
     'element-ui/lib/theme-chalk/reset.css',
     'element-ui/lib/theme-chalk/index.css',
     'normalize.css',
-    '@/assets/css/github-markdown.scss',
-    '@/assets/css/primjs-markdown.scss',
-    '@/assets/css/global.scss'
+    'highlight.js/styles/dark.css'
   ],
   plugins: [
-    '@/plugins/element-ui'
+    {
+      src: '@/plugins/element-ui'
+    },
+    {
+      src: '~/plugins/jquery.min.js',
+      ssr: false
+    }
   ],
   /*
   ** Customize the progress bar color
@@ -65,7 +64,8 @@ module.exports = {
     breaks: true,
     typographer: true,
     injected: true,
-    use: ['markdown-it-container', 'markdown-it-attrs']
+    html: true,
+    use: ['markdown-it-highlightjs']
   },
   generate: {
     routes: function () {
