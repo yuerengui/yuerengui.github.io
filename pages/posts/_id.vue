@@ -27,6 +27,7 @@
       </client-only>
     </el-main>
     <custom-footer></custom-footer>
+    <el-backtop></el-backtop>
   </el-container>
 </template>
 
@@ -43,11 +44,11 @@ export default {
     customFooter
   },
   async asyncData ({params, store}) {
-    await store.dispatch("LOAD_POST", params.slug);
+    await store.dispatch("LOAD_POST", params.id);
     let metadata = store.state.post
     return { 
       metadata: metadata,
-      post: require(`~/static/posts/${metadata.slug}.md`).default
+      post: require(`~/static/posts/${metadata.id}.md`).default
      }
   },
   computed: {

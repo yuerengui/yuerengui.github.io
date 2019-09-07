@@ -2,7 +2,7 @@
   <el-container direction="vertical">
     <custom-header></custom-header>
     <el-main>
-      <nuxt-link tag="div" class="nuxt-link" :to="'/posts/'+post.slug" :key="post.id" v-for="post in posts">
+      <nuxt-link tag="div" class="nuxt-link" :to="'/posts/'+post.id" :key="post.id" v-for="post in posts">
           <h2 class="article-title">{{post.title}}</h2>
           <div class="content-item">
               <p class="description">{{post.description}}</p>
@@ -17,9 +17,9 @@
       </nuxt-link>
     </el-main>
     <custom-footer></custom-footer>
+    <el-backtop></el-backtop>
   </el-container>
 </template>
-
 <script>
 import customHeader from "~/components/header/header";
 import customFooter from "~/components/footer/footer";
@@ -31,7 +31,7 @@ export default {
     customFooter
   },
   computed: mapState(["posts"]),
-  async fetch({ store }) {
+  async asyncData ({ store }) {
     await store.dispatch("LOAD_POSTS");
   }
 };

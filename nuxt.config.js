@@ -70,7 +70,7 @@ module.exports = {
   generate: {
     routes: function () {
       return metadata.posts.map(post => {
-        return '/posts/' + post.slug;
+        return '/posts/' + post.id;
       });
     }
   }

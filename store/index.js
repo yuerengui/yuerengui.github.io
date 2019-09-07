@@ -19,8 +19,8 @@ export const actions = {
     const posts = metadata.posts;
     commit('setPosts', posts);
   },
-  LOAD_POST({ commit }, slug) {
-    const post = metadata.posts.filter((post) => post.slug === slug)[0]
+  LOAD_POST({ commit }, id) {
+    const post = metadata.posts.filter((post) => post.id === id)[0]
     commit('setPost', post);
   }
 }
