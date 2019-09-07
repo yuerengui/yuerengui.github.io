@@ -1,4 +1,4 @@
-import entriesData from './static/entriesinfo.json';
+import metadata from './static/metadata.json';
 
 module.exports = {
   /*
@@ -12,15 +12,26 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'nuxt static blog' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css'
+      }
+    ],
+    script: [{
+      src: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js'
+    }],
   },
   /*
     ** Global CSS
     */
   css: [
     'element-ui/lib/theme-chalk/reset.css',
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    'normalize.css',
+    '@/assets/css/github-markdown.scss',
+    '@/assets/css/primjs-markdown.scss',
+    '@/assets/css/global.scss'
   ],
   plugins: [
     '@/plugins/element-ui'
@@ -58,8 +69,8 @@ module.exports = {
   },
   generate: {
     routes: function () {
-      return entriesData.entries.map(entry => {
-        return '/entries/' + entry.slug;
+      return metadata.posts.map(post => {
+        return '/posts/' + post.slug;
       });
     }
   }

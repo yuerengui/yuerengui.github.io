@@ -1,28 +1,25 @@
-import Vuex from 'vuex';
-import entriesData from '~/static/entriesinfo.json';
+import metadata from '../static/metadata.json';
 
 export const state = () => ({
-  entries: [],
-  entry: ''
+  posts: [],
+  post: ''
 })
 
 export const mutations = {
-  setEntries(state, data) {
-    state.entries = data;
+  setPosts(state, data) {
+    state.posts = data;
   },
-  setEntry(state, name) {
-    state.entry = name;
+  setPost(state, name) {
+    state.post = name;
   }
 }
 
 export const actions = {
-  LOAD_ENTRIES({ commit }) {
-    const entries = entriesData.entries;
-    commit('setEntries', entries);
+  LOAD_POSTS({ commit }) {
+    const posts = metadata.posts;
+    commit('setPosts', posts);
   },
-  LOAD_ENTRY({
-    commit
-  }, entryName) {
-    commit('setEntry', entryName);
+  LOAD_POST({ commit }, postName) {
+    commit('setPost', postName);
   }
 }

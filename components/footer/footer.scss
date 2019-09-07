@@ -1,0 +1,52 @@
+@import '@/assets/css/base-variable.scss';
+
+div.footer {
+  width: 100%;
+  background: #2f3234;
+  height: 180px;
+  position: relative;
+
+  div.container {
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-left: 20px;
+    overflow: hidden;
+    @include responseWidth;
+
+    dl {
+      float: left;
+      padding-right: 50px;
+
+      dt {
+        border-left: 4px solid #617ed1;
+        padding-left: 10px;
+        margin: 20px 0px 10px 0px;
+        color: #aaa;
+        font-weight: 700;
+        font-size: 18px;
+      }
+
+      dd {
+        padding-left: 10px;
+        line-height: 22px;
+
+        a {
+          color: #999;
+          font-size: 14px;
+        }
+      }
+    }
+
+    p.copy {
+      @include smallScreenHide;
+      width: 100%;
+      position: absolute;
+      left: 0px;
+      bottom: 0px;
+      text-align: center;
+      line-height: 80px;
+      color: #999;
+      font-size: 14px;
+    }
+  }
+}
