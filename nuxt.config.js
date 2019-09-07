@@ -46,9 +46,6 @@ module.exports = {
     injected: true,
     use: ['markdown-it-container', 'markdown-it-attrs']
   },
-  router: {
-    base: process.env.NODE_ENV === 'development' ? '/' : '/yuerengui.github.io/'
-  },
   generate: {
     routes: function () {
       return entriesData.entries.map(entry => {
