@@ -2,6 +2,7 @@ const urlMap = require('./static/url-map.json');
 const webpack = require('webpack')
 const path = require('path');
 var hljs = require('highlight.js');
+import prism from 'markdown-it-prism'
 const md =  require('markdown-it')({
   html: true,
   linkify: true,
@@ -14,7 +15,7 @@ const md =  require('markdown-it')({
     }
     return ''; // use external default escaping
   }
-}).use()
+}).use(prism)
 
 module.exports = {
   /*
@@ -59,27 +60,16 @@ module.exports = {
   */
   build: {
     extend (config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-        config.module.rules.push({
-          test: /\.md$/,
-          loader: 'frontmatter-markdown-loader',
-          include: [
-            path.resolve(__dirname, 'static/posts'),
-            path.resolve(__dirname, 'static/pages')
-          ],
-          options: {
-            markdown: (body) => {
-              return md.render(body)
-            }
+      config.module.rules.push({
+        test: /\.md$/,
+        loader: 'frontmatter-markdown-loader',
+        include: path.resolve(__dirname, 'static'),
+        options: {
+          markdown: (body) => {
+            return md.render(body)
           }
-        })
-      }
+        }
+      })
     }
   },
   buildModules: [

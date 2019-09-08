@@ -15,6 +15,7 @@
 <script>
 import customHeader from "~/components/header/header";
 import customFooter from "~/components/footer/footer";
+import about from '~/static/pages/about.md'
 
 export default {
   data() {
@@ -28,16 +29,11 @@ export default {
     customFooter
   },
   beforeRouteEnter(to, from, next) {
-    if(process.client) {
-      next(async (vm) => {
-        vm.loading = true
-        let post = await import(`~/static/pages/about.md`)
-        vm.post = post.html
-        vm.loading = false
-      })
-    } else {
-      next()
-    }
+    next(vm => {
+      vm.loading = true
+      vm.post = about.html
+      vm.loading = false
+    })
   }
 }
 </script>
