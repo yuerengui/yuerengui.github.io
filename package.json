@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "element-ui": "^2.12.0",
+    "highlight.js": "^9.15.10",
     "markdown-it-prism": "^2.0.2",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.9.2"
