@@ -1,9 +1,11 @@
 $borderColor:#eaeefb;
-$fontColor: #646363;
+$fontColor: #222222;
 $activeColor: #294696;
 $articleColor: #272829;
 $codeFontSize: 16px;
 $articleFontSize: 16px;
+$titleColor: #272829;
+$buttonActiveColor: #eee;
 @mixin transition {
   transition: all .2s ease-in-out;
 }

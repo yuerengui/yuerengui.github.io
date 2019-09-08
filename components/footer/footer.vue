@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="footer_container">
       <dl>
-        <dt>Words For You</dt>
+        <dt><span>[root@demon ~]#</span> quote | lolcat</dt>
         <dd>Samuel Johnson: "Do not accustom yourself to use big words for little matters."</dd>
       </dl>
     </div>
@@ -45,7 +45,9 @@ div.footer {
         margin: 20px 0px 10px 0px;
         color: #aaa;
         font-weight: 700;
-        font-size: 18px;
+        font-size: 16px;
+        height: 20px;
+        line-height: 20px;
       }
 
       dd {

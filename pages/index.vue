@@ -108,11 +108,9 @@ div.nuxt-link {
   cursor: pointer;
   h2.article-title {
     padding-bottom: 15px;
-    a {
-      color: $activeColor;
-      font-size: 18px;
-      font-weight: 700;
-    }
+    color: $titleColor;
+    font-size: 28px;
+    font-weight: 600;
   }
   div.content-item {
     overflow: hidden;
