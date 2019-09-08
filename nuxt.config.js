@@ -1,5 +1,11 @@
-import metadata from './static/metadata.json';
+const urlMap = require('./static/url-map.json');
 const webpack = require('webpack')
+const path = require('path');
+import prism from 'markdown-it-prism'
+const md =  require('markdown-it')({
+  html: true
+})
+md.use(prism)
 
 module.exports = {
   /*
@@ -43,9 +49,6 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    /*
-    ** Run ESLint on save
-    */
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -54,23 +57,23 @@ module.exports = {
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         })
+        config.module.rules.push({
+          test: /\.md$/,
+          loader: 'frontmatter-markdown-loader',
+          include: path.resolve(__dirname, 'static'),
+          options: {
+            markdown: (body) => {
+              return md.render(body)
+            }
+          }
+        })
       }
     }
   },
-  modules: ['@nuxtjs/markdownit'],
-  markdownit: {
-    preset: 'default',
-    linkify: true,
-    breaks: true,
-    typographer: true,
-    injected: true,
-    html: true,
-    use: ['markdown-it-highlightjs']
-  },
   generate: {
     routes: function () {
-      return metadata.posts.map(post => {
-        return '/posts/' + post.id;
+      return urlMap.ids.map(id => {
+        return '/posts/' + id;
       });
     }
   }

@@ -9,7 +9,7 @@
           :to="'/posts/'+post.id"
           :key="post.id"
           v-for="post in posts">
-          <h2 class="article-title">{{post.title}}</h2>
+          <h2 class="article-title">{{post.attributes.title}}</h2>
           <div class="content-item">
             <p class="description" v-html="post.detail"></p>
           </div>
@@ -17,9 +17,9 @@
             <span class="bottom_left">
               <span class="time">
                 <i class="el-icon-date"></i>
-                {{post.createdAt}}
+                {{post.date}}
               </span>
-              <el-tag v-for="(tag, index) in post.tags" :key="index" size="mini">{{tag}}</el-tag>
+              <el-tag v-for="(tag, index) in post.attributes.tags" :key="index" size="mini">{{tag}}</el-tag>
             </span>
             <el-link class="bottom_right" :underline="false">Read More</el-link>
           </p>
@@ -40,54 +40,44 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      loading: true
+      loading: true,
+      posts: null
     }
   },
   components: {
     customHeader,
     customFooter
   },
-  computed: mapState(["posts"]),
+  computed: mapState(["post_id_array"]),
   async asyncData({ store }) {
-    await store.dispatch("LOAD_POSTS");
+    await store.dispatch("LOAD_POSTS_ID_ARRAY");
   },
   beforeRouteEnter(to, from, next) {
     if(process.client) {
-      next(vm => {
+      next(async (vm) => {
         vm.loading = true
-        vm.posts.map(post => {
-          post.detail = vm.postDetail(post.id)
-          return post
+        let posts = []
+        for(let i = 0; i < vm.post_id_array.length; i++) {
+          let id = vm.post_id_array[i]
+          let mdContent =  await import(`~/static/posts/${id}.md`);
+          let oDiv = document.createElement('div')
+          oDiv.innerHTML = mdContent.html
+          $(oDiv).find('more').parent().nextAll().remove()
+          $(oDiv).addClass('markdown-body')
+          let item = {
+            id: id,
+            detail: oDiv.outerHTML,
+            attributes: mdContent.attributes
+          }
+          posts.push(item)
+        }
+        vm.posts = posts
+        vm.$nextTick(() => {
+          vm.loading = false
         })
-        vm.loading = false
       })
     } else {
       next()
-    }
-  },
-  watch: {
-    loading(value) {
-      if (value === true) {
-        this.$nextTick(() => {
-          this.$nuxt.$loading.start()
-        })
-      } else {
-        this.$nextTick(() => {
-          this.$nuxt.$loading.finish()
-        })
-      }
-    }
-  },
-  methods: {
-    postDetail(id) {
-      if(process.client) {
-        let post = require(`~/static/posts/${id}.md`).default;
-        let oDiv = document.createElement('div')
-        oDiv.innerHTML = post
-        $(oDiv).find('more').parent().nextAll().remove()
-        $(oDiv).addClass('markdown-body')
-        return oDiv.outerHTML
-      }
     }
   }
 };

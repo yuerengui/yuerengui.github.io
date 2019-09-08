@@ -1,3 +1,11 @@
+---
+title: macOS 安装 LNMP
+date: 2019-09-08 17:26:08
+tags:
+    - MAC
+    - LNMP
+---
+
 # 安装之前
 
 > 之前写过一篇 `mac` 环境安装的文章,但是不太满意，当时也就是囫囵吞枣不求甚解的把环境运行成功就 ok 了，有些重要的步骤也没有提及，趁着现在重新安装 lnmp 环境的时候再写一遍文章，把内容整理清楚。
@@ -51,8 +59,6 @@ $ brew services start mysql # 开机启动
 $ mysql_secure_installation # 安全设置
 $ mysql.server start # 启动 Mysql
 ```
-
-<!-- more -->
 
 ## 安装 php7
 

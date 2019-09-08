@@ -2,10 +2,10 @@
   <div class="container detail">
     <transition name="fade">
       <header v-if="!loading">
-        <h1 class="title">{{metadata.title}}</h1>
+        <h1 class="title">{{attributes.title}}</h1>
         <p class="bottom">
-          <span class="time">发布于：{{metadata.createdAt}}</span>
-          <el-tag v-for="(tag, index) in metadata.tags" :key="index" size='mini'>{{tag}}</el-tag>
+          <span class="time">发布于：{{attributes.date}}</span>
+          <el-tag v-for="(tag, index) in attributes.tags" :key="index" size='mini'>{{tag}}</el-tag>
         </p>
         <nuxt-link class="return" to="/">
           <i class="el-icon-arrow-left"></i>
@@ -16,7 +16,7 @@
       <div class="main" v-if="!loading">
           <div v-html="post" class="content markdown-body"></div>
           <div class="copyright">
-            <p class="title">文章名：{{metadata.title}}</p>
+            <p class="title">文章名：{{attributes.title}}</p>
             <p class="copyright">
               版权声明：
               <a href="javascript:;">署名-非商业使用-禁止演绎 3.0 国际</a>
@@ -41,30 +41,23 @@ import customHeader from "~/components/header/header";
 import customFooter from "~/components/footer/footer";
 
 export default {
-  data() {
-    return {
-      metadata: null,
-      post: {},
-      loading: true
-    };
-  },
   components: {
     customHeader,
     customFooter
   },
   async asyncData ({params, store}) {
-    await store.dispatch("LOAD_POST", params.id);
+    return {
+      loading: true
+    }
   },
-  beforeRouteEnter(to, from, next) {
+  async beforeRouteEnter(to, from, next) {
     if(process.client) {
-      next(vm => {
-        vm.loading = true
-        vm.metadata = vm.$store.state.post
-        vm.post = require(`~/static/posts/${vm.metadata.id}.md`).default
+      const post = await import(`~/static/posts/${params.id}.md`)
+      next((vm) => {
+        vm.attributes = post.attributes
+        vm.post = post.html
         vm.loading = false
       })
-    } else {
-      next()
     }
   },
   computed: {

@@ -1,26 +1,24 @@
-import metadata from '../static/metadata.json';
+import post_id_array from '../static/url-map.json';
 
 export const state = () => ({
-  posts: [],
-  post: ''
+  post_id_array: [],
+  post_id: ''
 })
 
 export const mutations = {
-  setPosts(state, posts) {
-    state.posts = posts;
+  setPostIds(state, posts) {
+    state.post_id_array = posts;
   },
-  setPost(state, post) {
-    state.post = post;
+  setPostId(state, id) {
+    state.post_id = id;
   }
 }
 
 export const actions = {
-  LOAD_POSTS({ commit }) {
-    const posts = metadata.posts;
-    commit('setPosts', posts);
+  LOAD_POSTS_ID_ARRAY({ commit }) {
+    commit('setPostIds', post_id_array.ids);
   },
-  LOAD_POST({ commit }, id) {
-    const post = metadata.posts.filter((post) => post.id === id)[0]
-    commit('setPost', post);
+  LOAD_POST_ID({ commit }, id) {
+    commit('setPostId', id);
   }
 }
