@@ -90,13 +90,13 @@ header {
       box-sizing: border-box;
       padding: 20px;
       justify-content: center;
-
       img {
         border: 1px solid $borderColor;
         border-radius: 50%;
         width: 150px;
         height: 150px;
-        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.6)
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.6);
+        background: #ccc;
       }
     }
 

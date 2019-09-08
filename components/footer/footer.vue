@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="container">
+    <div class="footer_container">
       <dl>
         <dt>Words For You</dt>
         <dd>Samuel Johnson: "Do not accustom yourself to use big words for little matters."</dd>
@@ -28,7 +28,7 @@ div.footer {
   padding-bottom: 20px;
   position: relative;
 
-  div.container {
+  div.footer_container {
     margin: 0 auto;
     box-sizing: border-box;
     padding-left: 20px;

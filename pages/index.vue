@@ -1,8 +1,8 @@
 <template>
-  <el-container direction="vertical">
+  <div class="container">
     <custom-header></custom-header>
-    <el-main v-loading="loading">
-      <client-only>
+    <transition name="fade">
+      <div class="main" v-if="!loading">
         <nuxt-link
           tag="div"
           class="nuxt-link"
@@ -11,7 +11,7 @@
           v-for="post in posts">
           <h2 class="article-title">{{post.title}}</h2>
           <div class="content-item">
-            <p class="description" v-html="postDetail(post.id)"></p>
+            <p class="description" v-html="post.detail"></p>
           </div>
           <p class="bottom">
             <span class="time">
@@ -21,11 +21,13 @@
             <el-tag v-for="(tag, index) in post.tags" :key="index" size="mini">{{tag}}</el-tag>
           </p>
         </nuxt-link>
-      </client-only>
-    </el-main>
-    <custom-footer></custom-footer>
+      </div>
+    </transition>
+    <transition name="fade">
+      <custom-footer v-if="!loading"></custom-footer>
+    </transition>
     <el-backtop></el-backtop>
-  </el-container>
+  </div>
 </template>
 <script>
 import customHeader from "~/components/header/header";
@@ -33,18 +35,45 @@ import customFooter from "~/components/footer/footer";
 import { mapState } from "vuex";
 
 export default {
-  components: {
-    customHeader,
-    customFooter
-  },
   data() {
     return {
       loading: true
     }
   },
+  components: {
+    customHeader,
+    customFooter
+  },
   computed: mapState(["posts"]),
   async asyncData({ store }) {
     await store.dispatch("LOAD_POSTS");
+  },
+  beforeRouteEnter(to, from, next) {
+    if(process.client) {
+      next(vm => {
+        vm.loading = true
+        vm.posts.map(post => {
+          post.detail = vm.postDetail(post.id)
+          return post
+        })
+        vm.loading = false
+      })
+    } else {
+      next()
+    }
+  },
+  watch: {
+    loading(value) {
+      if (value === true) {
+        this.$nextTick(() => {
+          this.$nuxt.$loading.start()
+        })
+      } else {
+        this.$nextTick(() => {
+          this.$nuxt.$loading.finish()
+        })
+      }
+    }
   },
   methods: {
     postDetail(id) {
@@ -54,11 +83,6 @@ export default {
         oDiv.innerHTML = post
         $(oDiv).find('more').parent().nextAll().remove()
         $(oDiv).addClass('markdown-body')
-        if(id === this.posts[this.posts.length - 1].id) {
-          this.$nextTick(() => {
-            this.loading = false
-          })
-        }
         return oDiv.outerHTML
       }
     }
@@ -66,8 +90,8 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "../assets/css/base-variable.scss";
-@import "../assets/css/github-markdown.scss";
+@import "@/assets/css/base-variable.scss";
+@import "@/assets/css/github-markdown.scss";
 
 div.nuxt-link {
   float: left;

@@ -1,43 +1,52 @@
 <template>
-  <el-container direction="vertical" class="detail">
-    <header>
-      <h1 class="title">{{metadata.title}}</h1>
-      <p class="bottom">
-        <span class="time">发布于：{{metadata.createdAt}}</span>
-        <el-tag v-for="(tag, index) in metadata.tags" :key="index" size='mini'>{{tag}}</el-tag>
-      </p>
-    </header>
-    <el-main class="main">
-      <client-only>
-        <div v-html="post" class="content markdown-body"></div>
-        <div class="copyright">
-          <p class="title">文章名：{{metadata.title}}</p>
-          <p class="copyright">
-            版权声明：
-            <a href="javascript:;">署名-非商业使用-禁止演绎 3.0 国际</a>
-          </p>
-          <p class="artilce-link">
-            原文链接：
-            <a :href="articleUrl">{{articleUrl}}</a>
-          </p>
-        </div>
-        <nuxt-link class="return" to="/">
-          <i class="el-icon-arrow-left"></i>
-        </nuxt-link>
-      </client-only>
-    </el-main>
-    <custom-footer></custom-footer>
+  <div class="container detail">
+    <transition name="fade">
+      <header v-if="!loading">
+        <h1 class="title">{{metadata.title}}</h1>
+        <p class="bottom">
+          <span class="time">发布于：{{metadata.createdAt}}</span>
+          <el-tag v-for="(tag, index) in metadata.tags" :key="index" size='mini'>{{tag}}</el-tag>
+        </p>
+      </header>
+    </transition>
+    <transition name="fade">
+      <div class="main" v-if="!loading">
+          <div v-html="post" class="content markdown-body"></div>
+          <div class="copyright">
+            <p class="title">文章名：{{metadata.title}}</p>
+            <p class="copyright">
+              版权声明：
+              <a href="javascript:;">署名-非商业使用-禁止演绎 3.0 国际</a>
+            </p>
+            <p class="artilce-link">
+              原文链接：
+              <a :href="articleUrl">{{articleUrl}}</a>
+            </p>
+          </div>
+          <nuxt-link class="return" to="/">
+            <i class="el-icon-arrow-left"></i>
+          </nuxt-link>
+      </div>
+    </transition>
+    <transition name="fade">
+      <custom-footer v-if="!loading"></custom-footer>
+    </transition>
     <el-backtop></el-backtop>
-  </el-container>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import customHeader from "~/components/header/header";
 import customFooter from "~/components/footer/footer";
+
 export default {
   data() {
-    return {};
+    return {
+      metadata: null,
+      post: {},
+      loading: true
+    };
   },
   components: {
     customHeader,
@@ -45,11 +54,18 @@ export default {
   },
   async asyncData ({params, store}) {
     await store.dispatch("LOAD_POST", params.id);
-    let metadata = store.state.post
-    return { 
-      metadata: metadata,
-      post: require(`~/static/posts/${metadata.id}.md`).default
-     }
+  },
+  beforeRouteEnter(to, from, next) {
+    if(process.client) {
+      next(vm => {
+        vm.loading = true
+        vm.metadata = vm.$store.state.post
+        vm.post = require(`~/static/posts/${vm.metadata.id}.md`).default
+        vm.loading = false
+      })
+    } else {
+      next()
+    }
   },
   computed: {
     articleUrl() {
@@ -67,8 +83,9 @@ export default {
 </script>
 <style lang="scss">
 @import '../../assets/css/base-variable.scss';
+@import "@/assets/css/github-markdown.scss";
 
-.el-container.detail {
+div.container.detail {
   header {
     height: 255px;
     width: 100%;
@@ -99,7 +116,7 @@ export default {
       }
     }
   }
-  .el-main.main {
+  div.main {
     @include responseWidth;
     margin: 20px auto;
     overflow: hidden;
