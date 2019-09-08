@@ -244,22 +244,22 @@ nginx rewrite 配置
 
 ```bash
 if (!-d $request_filename)
-            {
-                rewrite ^/(.+)/$ /$1 permanent;
-            }
+{
+    rewrite ^/(.+)/$ /$1 permanent;
+}
 
-            # removes trailing "index" from all controllers
-            if ($request_uri ~* index/?$)
-            {
-                rewrite ^/(.*)/index/?$ /$1 permanent;
-            }
+# removes trailing "index" from all controllers
+if ($request_uri ~* index/?$)
+{
+    rewrite ^/(.*)/index/?$ /$1 permanent;
+}
 
-            # unless the request is for a valid file (image, js, css, etc.), send to bootstrap
-            if (!-e $request_filename)
-            {
-                rewrite ^/(.*)$ /index.php?/$1 last;
-                break;
-            }
+# unless the request is for a valid file (image, js, css, etc.), send to bootstrap
+if (!-e $request_filename)
+{
+    rewrite ^/(.*)$ /index.php?/$1 last;
+    break;
+}
 ```
 
 > Refer to:

@@ -84,7 +84,8 @@ export default {
 </script>
 <style lang="scss">
 @import "@/assets/css/base-variable.scss";
-@import "@/assets/css/github-markdown.scss";
+@import "@/assets/css/markdown.scss";
+
 div.nuxt-link {
   float: left;
   width: 100%;
@@ -130,6 +131,8 @@ div.nuxt-link {
       span.time {
         font-size: 14px;
         color: $fontColor;
+        padding-right: 10px;
+        @include smallScreenHide;
         i {
           padding-right: 5px;
           font-size: 14px;
@@ -137,10 +140,6 @@ div.nuxt-link {
       }
       .el-tag {
         margin-right: 5px;
-      }
-      span.time {
-        width: 180px;
-        @include smallScreenHide;
       }
     }
     .bottom_right{

@@ -1,7 +1,13 @@
 {
   "ids": [
+    "google-maps-quick-start",
+    "elasticsearch-quick-start",
     "macos-install-lnmp",
     "how-to-remove-subtitles",
-    "my-sublime-settings"
+    "my-sublime-settings",
+    "git-frequency-use-command",
+    "how-to-use-homestead",
+    "laravel-study",
+    "linux-frequency-use-command"
   ]
 }

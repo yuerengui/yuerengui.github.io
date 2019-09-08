@@ -39,7 +39,7 @@ export default {
 </script>
 <style lang="scss">
 @import "@/assets/css/base-variable.scss";
-@import "@/assets/css/github-markdown.scss";
+@import "@/assets/css/markdown.scss";
 
 div.content{
   background: #fff;

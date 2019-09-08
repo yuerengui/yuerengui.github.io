@@ -4,8 +4,8 @@
       <header v-if="!loading">
         <h1 class="title">{{attributes.title}}</h1>
         <p class="bottom">
-          <span class="time">发布于：{{$moment().calendar(attributes.date)}}</span>
-          <el-tag v-for="(tag, index) in attributes.tags" :key="index" size='mini'>{{tag}}</el-tag>
+          <span class="time">发布于: {{$moment().calendar(attributes.date)}}</span>
+          <el-tag v-for="(tag, index) in attributes.tags" :key="index" size="mini">{{tag}}</el-tag>
         </p>
         <nuxt-link class="return" to="/">
           <i class="el-icon-arrow-left"></i>
@@ -14,18 +14,18 @@
     </transition>
     <transition name="fade">
       <div class="main" v-if="!loading">
-          <div v-html="post" class="content markdown-body"></div>
-          <div class="copyright">
-            <p class="title">文章名：{{attributes.title}}</p>
-            <p class="copyright">
-              版权声明：
-              <a href="javascript:;">署名-非商业使用-禁止演绎 3.0 国际</a>
-            </p>
-            <p class="artilce-link">
-              原文链接：
-              <a :href="articleUrl">{{articleUrl}}</a>
-            </p>
-          </div>
+        <div v-html="post" class="content markdown-body"></div>
+        <div class="copyright">
+          <p class="title">文章名：{{attributes.title}}</p>
+          <p class="copyright">
+            版权声明：
+            <a href="javascript:;">署名-非商业使用-禁止演绎 3.0 国际</a>
+          </p>
+          <p class="artilce-link">
+            原文链接：
+            <a :href="articleUrl">{{articleUrl}}</a>
+          </p>
+        </div>
       </div>
     </transition>
     <transition name="fade">
@@ -40,32 +40,33 @@ import { mapGetters } from "vuex";
 import customHeader from "~/components/header/header";
 import customFooter from "~/components/footer/footer";
 
+
 export default {
   components: {
     customHeader,
     customFooter
   },
-  async asyncData ({params, store}) {
+  async asyncData({ params, store }) {
     return {
       loading: true
-    }
+    };
   },
   beforeRouteEnter(to, from, next) {
-    if(process.client) {
-      next(async (vm) => {
-        const post = await import(`~/static/posts/${to.params.id}.md`)
-        vm.attributes = post.attributes
-        vm.post = post.html
-        vm.loading = false
-      })
+    if (process.client) {
+      next(async vm => {
+        const post = await import(`~/static/posts/${to.params.id}.md`);
+        vm.attributes = post.attributes;
+        vm.post = post.html;
+        vm.loading = false;
+      });
     } else {
-      next()
+      next();
     }
   },
   computed: {
     articleUrl() {
-      if(process.client) {
-        return window.location.href
+      if (process.client) {
+        return window.location.href;
       }
     }
   },
@@ -77,8 +78,8 @@ export default {
 };
 </script>
 <style lang="scss">
-@import '../../assets/css/base-variable.scss';
-@import "@/assets/css/github-markdown.scss";
+@import "../../assets/css/base-variable.scss";
+@import "../../assets/css/markdown.scss";
 
 div.container.detail {
   header {
@@ -102,9 +103,9 @@ div.container.detail {
         color: $articleColor;
         cursor: pointer;
       }
-      &:hover{
+      &:hover {
         border: 2px solid $activeColor;
-        i{
+        i {
           color: $activeColor;
         }
       }
@@ -127,7 +128,7 @@ div.container.detail {
       span.time {
         padding-right: 10px;
       }
-      .el-tag{
+      .el-tag {
         margin-right: 5px;
       }
     }
@@ -139,7 +140,7 @@ div.container.detail {
     div.content {
       background: #fff;
       box-sizing: border-box;
-      padding: 20px;
+      padding: 40px;
       border-radius: 6px;
       font-size: 16px;
       color: $articleColor;

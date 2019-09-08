@@ -1,21 +1,30 @@
 const urlMap = require('./static/url-map.json');
 const webpack = require('webpack')
 const path = require('path');
-var hljs = require('highlight.js');
-import prism from 'markdown-it-prism'
-const md =  require('markdown-it')({
+const { Remarkable } = require('remarkable');
+import hljs from 'highlight.js'
+const md = new Remarkable('full', {
   html: true,
+  xhtmlOut: false,
+  breaks: true,
+  langPrefix: 'language-',
   linkify: true,
-  typographer: true,
+  linkTarget: '',
+  quotes: '“”‘’',
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
         return hljs.highlight(lang, str).value;
-      } catch (__) {}
+      } catch (err) {}
     }
+    try {
+      return hljs.highlightAuto(str).value;
+    } catch (err) {}
+
     return ''; // use external default escaping
   }
-}).use(prism)
+});
+
 
 module.exports = {
   /*
