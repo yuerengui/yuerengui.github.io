@@ -60,7 +60,10 @@ module.exports = {
         config.module.rules.push({
           test: /\.md$/,
           loader: 'frontmatter-markdown-loader',
-          include: path.resolve(__dirname, 'static'),
+          include: [
+            path.resolve(__dirname, 'static/posts'),
+            path.resolve(__dirname, 'static/pages')
+          ],
           options: {
             markdown: (body) => {
               return md.render(body)
@@ -70,6 +73,12 @@ module.exports = {
       }
     }
   },
+  buildModules: [
+    '@nuxtjs/moment'
+  ],
+  modules: [
+    '@nuxtjs/moment'
+  ],
   generate: {
     routes: function () {
       return urlMap.ids.map(id => {

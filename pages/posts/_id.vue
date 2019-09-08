@@ -4,7 +4,7 @@
       <header v-if="!loading">
         <h1 class="title">{{attributes.title}}</h1>
         <p class="bottom">
-          <span class="time">发布于：{{attributes.date}}</span>
+          <span class="time">发布于：{{$moment().calendar(attributes.date)}}</span>
           <el-tag v-for="(tag, index) in attributes.tags" :key="index" size='mini'>{{tag}}</el-tag>
         </p>
         <nuxt-link class="return" to="/">
@@ -50,14 +50,16 @@ export default {
       loading: true
     }
   },
-  async beforeRouteEnter(to, from, next) {
+  beforeRouteEnter(to, from, next) {
     if(process.client) {
-      const post = await import(`~/static/posts/${params.id}.md`)
-      next((vm) => {
+      next(async (vm) => {
+        const post = await import(`~/static/posts/${to.params.id}.md`)
         vm.attributes = post.attributes
         vm.post = post.html
         vm.loading = false
       })
+    } else {
+      next()
     }
   },
   computed: {

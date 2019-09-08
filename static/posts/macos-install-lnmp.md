@@ -2,7 +2,7 @@
 title: macOS 安装 LNMP
 date: 2019-09-08 17:26:08
 tags:
-    - MAC
+    - Mac
     - LNMP
 ---
 

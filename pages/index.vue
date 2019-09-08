@@ -17,7 +17,7 @@
             <span class="bottom_left">
               <span class="time">
                 <i class="el-icon-date"></i>
-                {{post.date}}
+                {{$moment().calendar(post.attributes.date)}}
               </span>
               <el-tag v-for="(tag, index) in post.attributes.tags" :key="index" size="mini">{{tag}}</el-tag>
             </span>

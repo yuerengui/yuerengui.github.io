@@ -1,9 +1,10 @@
 ---
-title: macOS 安装 LNMP
-date: 2019-09-08 17:26:08
+title: sublime3 常用设定
+date: 2017-05-24 18:35:02
 tags:
-    - MAC
-    - LNMP
+    - Mac
+    - 编辑器
+    - Sublime
 ---
 
 # 添加命令行
