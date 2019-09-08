@@ -1,11 +1,20 @@
 const urlMap = require('./static/url-map.json');
 const webpack = require('webpack')
 const path = require('path');
-import prism from 'markdown-it-prism'
+var hljs = require('highlight.js');
 const md =  require('markdown-it')({
-  html: true
-})
-md.use(prism)
+  html: true,
+  linkify: true,
+  typographer: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+    return ''; // use external default escaping
+  }
+}).use()
 
 module.exports = {
   /*

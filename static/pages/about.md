@@ -1,6 +1,3 @@
----
----
-
 [简历地址](https://github.com/yuerengui/resume) 
 
 + Email: michael-fassbender@foxmail.com

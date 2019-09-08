@@ -29,9 +29,10 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     if(process.client) {
-      next(vm => {
+      next(async (vm) => {
         vm.loading = true
-        vm.post = require(`~/static/pages/about.md`).default
+        let post = await import(`~/static/pages/about.md`)
+        vm.post = post.html
         vm.loading = false
       })
     } else {
