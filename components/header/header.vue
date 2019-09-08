@@ -23,11 +23,11 @@
     <nav>
       <ul class="nav">
         <li>
-          <nuxt-link exact to="/" active-class="active">首页</nuxt-link>
+          <nuxt-link exact to="/" active-class="active">Home</nuxt-link>
         </li>
-        <!-- <li>
+        <li>
           <nuxt-link exact to="/about" active-class="active">About</nuxt-link>
-        </li> -->
+        </li>
       </ul>
     </nav>
   </header>
