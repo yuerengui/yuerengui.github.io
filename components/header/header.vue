@@ -2,7 +2,7 @@
   <header>
     <div class="top">
       <div class="top_inner">
-        <div class="logo"><img src="images/icon.png"></div>
+        <div class="logo"><img src="/images/icon.png"></div>
         <nav>
           <ul class="nav">
             <li>
@@ -22,7 +22,7 @@
           </li>
         </ul>
         <a href="https://github.com/yuerengui/yuerengui.github.io" class="fork">
-          <img src="images/fork.svg" alt="" style="position: absolute;right: 0px;top: 0px;">
+          <img src="/images/fork.svg" alt="" style="position: absolute;right: 0px;top: 0px;">
         </a>
       </div>
     </div>
