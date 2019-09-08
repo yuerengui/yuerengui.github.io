@@ -14,11 +14,14 @@
             <p class="description" v-html="post.detail"></p>
           </div>
           <p class="bottom">
-            <span class="time">
-              <i class="el-icon-date"></i>
-              {{post.createdAt}}
+            <span class="bottom_left">
+              <span class="time">
+                <i class="el-icon-date"></i>
+                {{post.createdAt}}
+              </span>
+              <el-tag v-for="(tag, index) in post.tags" :key="index" size="mini">{{tag}}</el-tag>
             </span>
-            <el-tag v-for="(tag, index) in post.tags" :key="index" size="mini">{{tag}}</el-tag>
+            <el-link class="bottom_right" :underline="false">Read More</el-link>
           </p>
         </nuxt-link>
       </div>
@@ -92,7 +95,6 @@ export default {
 <style lang="scss">
 @import "@/assets/css/base-variable.scss";
 @import "@/assets/css/github-markdown.scss";
-
 div.nuxt-link {
   float: left;
   width: 100%;
@@ -131,24 +133,33 @@ div.nuxt-link {
     }
   }
   p.bottom {
-    display: flex;
-    align-items: center;
     padding-top: 10px;
-    span.time {
-      font-size: 14px;
-      padding-right: 20px;
-      color: $fontColor;
-      i {
-        padding-right: 5px;
+    display: flex;
+    justify-content: space-between;
+    .bottom_left{
+      display: flex;
+      align-items: center;
+      span.time {
         font-size: 14px;
+        color: $fontColor;
+        i {
+          padding-right: 5px;
+          font-size: 14px;
+        }
+      }
+      .el-tag {
+        margin-right: 5px;
+      }
+      span.time {
+        width: 180px;
+        @include smallScreenHide;
       }
     }
-    .el-tag {
-      margin-right: 5px;
-    }
-    span.time {
-      width: 180px;
-      @include smallScreenHide;
+    .bottom_right{
+      border-bottom: 1px solid #aaa;
+      &:hover{
+        border-bottom: 1px solid #409EFF;
+      }
     }
   }
 }

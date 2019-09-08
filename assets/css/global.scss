@@ -13,7 +13,7 @@ a {
 }
 
 body {
-  background: #f6f6f6;
+background: #f6f6f6;
 }
 
 ol,
@@ -25,9 +25,33 @@ div.container{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  .el-tag {
+    background-color: rgb(114.0, 119.0, 192.0);
+    border-color: rgb(114.0, 119.0, 192.0);
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+    height: 25px;
+    line-height: 24px;
+    border-radius: 25px;
+  }
+  .el-backtop,
+  .el-calendar-table td.is-today {
+    color: $activeColor;
+  }
 }
 div.main{
   @include responseWidth;
   margin: 40px auto 20px;
   flex: 1;
+}
+.fade-enter-active, .fade-leave-active {
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+.fade-enter, .fade-leave-to{
+  transform: translateY(-20px);
+  opacity: 0;
 }

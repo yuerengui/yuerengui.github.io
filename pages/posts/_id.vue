@@ -7,6 +7,9 @@
           <span class="time">发布于：{{metadata.createdAt}}</span>
           <el-tag v-for="(tag, index) in metadata.tags" :key="index" size='mini'>{{tag}}</el-tag>
         </p>
+        <nuxt-link class="return" to="/">
+          <i class="el-icon-arrow-left"></i>
+        </nuxt-link>
       </header>
     </transition>
     <transition name="fade">
@@ -23,9 +26,6 @@
               <a :href="articleUrl">{{articleUrl}}</a>
             </p>
           </div>
-          <nuxt-link class="return" to="/">
-            <i class="el-icon-arrow-left"></i>
-          </nuxt-link>
       </div>
     </transition>
     <transition name="fade">
@@ -87,12 +87,33 @@ export default {
 
 div.container.detail {
   header {
-    height: 255px;
+    height: 200px;
     width: 100%;
     background: #ffffff;
     border-bottom: 1px solid $borderColor;
     color: $activeColor;
     position: relative;
+    a.return {
+      display: block;
+      position: absolute;
+      left: 50px;
+      top: 50px;
+      padding: 5px;
+      border: 2px solid $articleColor;
+      border-radius: 50%;
+      @include transition;
+      i {
+        font-size: 25px;
+        color: $articleColor;
+        cursor: pointer;
+      }
+      &:hover{
+        border: 2px solid $activeColor;
+        i{
+          color: $activeColor;
+        }
+      }
+    }
     h1.title {
       width: 100%;
       box-sizing: border-box;
@@ -100,7 +121,7 @@ div.container.detail {
       text-align: left;
       font-size: 25px;
       font-weight: 700;
-      padding-top: 170px;
+      padding-top: 110px;
     }
     p.bottom {
       position: absolute;
@@ -142,21 +163,6 @@ div.container.detail {
         font-size: 14px;
         line-height: 25px;
         a {
-          color: $activeColor;
-        }
-      }
-    }
-    a.return {
-      display: block;
-      position: absolute;
-      left: 50px;
-      top: 50px;
-      i {
-        font-size: 40px;
-        color: $articleColor;
-        @include transition;
-        cursor: pointer;
-        &:hover {
           color: $activeColor;
         }
       }
