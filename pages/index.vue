@@ -56,6 +56,7 @@ export default {
     if(process.client) {
       next(async (vm) => {
         vm.loading = true
+        vm.$nuxt.$loading.start()
         let posts = []
         for(let i = 0; i < vm.post_id_array.length; i++) {
           let id = vm.post_id_array[i]
@@ -85,8 +86,9 @@ export default {
           posts.push(item)
         }
         vm.posts = posts
+        vm.loading = false
         vm.$nextTick(() => {
-          vm.loading = false
+          vm.$nuxt.$loading.finish()
         })
       })
     } else {

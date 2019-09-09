@@ -54,10 +54,14 @@ export default {
   beforeRouteEnter(to, from, next) {
     if (process.client) {
       next(async vm => {
+        vm.$nuxt.$loading.start()
         const post = await import(`~/static/posts/${to.params.id}.md`);
         vm.attributes = post.attributes;
         vm.post = post.html;
         vm.loading = false;
+        vm.$nextTick(() => {
+          vm.$nuxt.$loading.finish()
+        })
       });
     } else {
       next();
