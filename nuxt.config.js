@@ -1,7 +1,11 @@
 const urlMap = require('./static/url-map.json');
 const webpack = require('webpack')
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 const path = require('path');
 import hljs from 'highlight.js'
+
 var md = require('markdown-it')({
   html: true,
   xhtmlOut: false,
@@ -78,7 +82,24 @@ module.exports = {
           }
         }
       })
-    }
+    },
+    plugins: [
+      new CopyWebpackPlugin([{
+        from: path.resolve(__dirname, 'static/images/blog'),
+        to: path.resolve(__dirname, 'dist/images/blog')
+      }, {
+        from: path.resolve(__dirname, 'static/images/cover'),
+        to: path.resolve(__dirname, 'dist/images/cover')
+      }]),
+      new ImageminPlugin({
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        plugins: [
+          imageminMozjpeg({
+            quality: 70
+          })
+        ]
+      })
+    ]
   },
   buildModules: [
     '@nuxtjs/moment'
