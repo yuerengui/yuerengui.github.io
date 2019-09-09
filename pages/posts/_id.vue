@@ -61,6 +61,8 @@ export default {
         vm.loading = false;
         vm.$nextTick(() => {
           vm.$nuxt.$loading.finish()
+          // View a list of images
+          const gallery = new Viewer(document.querySelector('.markdown-body'));
         })
       });
     } else {
@@ -82,8 +84,9 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "../../assets/css/base-variable.scss";
-@import "../../assets/css/markdown.scss";
+@import "@/assets/css/base-variable.scss";
+@import "@/assets/css/markdown.scss";
+@import "@/assets/css/viewer.css";
 
 div.container.detail {
   header {
@@ -141,6 +144,9 @@ div.container.detail {
     @include responseWidth;
     margin: 20px auto;
     overflow: hidden;
+    img{
+      cursor: pointer;
+    }
     div.content {
       background: #fff;
       box-sizing: border-box;

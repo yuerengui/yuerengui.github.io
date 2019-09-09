@@ -54,12 +54,24 @@ module.exports = {
   plugins: [
     {
       src: '@/plugins/element-ui'
-    },
-    {
+    }, {
       src: '~/plugins/jquery.min.js',
+      ssr: false
+    }, {
+      src: '~/plugins/viewer.js',
       ssr: false
     }
   ],
+  // , {
+  //   src: '~/plugins/jquery.min.js',
+  //   ssr: false
+  // }, {
+  //   src: '~/plugins/jquery-viewer.js',
+  //   ssr: false
+  // }, {
+  //   src: '~/plugins/viewer.js',
+  //   ssr: false
+  // }
   /*
   ** Customize the progress bar color
   */
