@@ -9,5 +9,3 @@ tags:
 ![Alt text](/images/blog/kitten.jpg)
 
 ![Alt text](/images/blog/gold-retriever.jpg)
-
-![Alt text](/static/images/avatar.png)
