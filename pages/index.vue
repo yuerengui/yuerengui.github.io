@@ -68,10 +68,15 @@ export default {
 
           // 处理图片
           let imageList = $(oDiv).find('img')
-          $(oDiv).find('img').parent('p').remove()
-          let imageContainer = $('<div class="image_container"></div>')
-          imageContainer = imageContainer.append(imageList)
-          $(oDiv).prepend(imageContainer)
+          if(imageList.length > 0) {
+            $(oDiv).find('img').parent('p').remove()
+            let imageContainer = $('<div class="image_container"></div>')
+            imageContainer = imageContainer.append(imageList)
+            imageContainer = imageContainer.append('<span></span>')
+            imageContainer = imageContainer.append('<span></span>')
+            $(oDiv).prepend(imageContainer)
+          }
+          
           let item = {
             id: id,
             detail: oDiv.outerHTML,
@@ -124,15 +129,20 @@ export default {
     justify-content: space-around;
     align-items: center;
     padding-bottom: 10px;
+    flex-wrap: wrap;
     img{
       max-height: 300px;
       height: 300px;
       width: 33%;
       padding-right: 10px;
       object-fit: cover;
+      margin-top: 10px;
       &:last-child() {
         padding-right: 0px;
       }
+    }
+    span{
+      width: 33%;
     }
   }
 }
