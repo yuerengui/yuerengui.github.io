@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container home">
     <custom-header></custom-header>
     <transition name="fade">
       <div class="main" v-if="!loading">
@@ -85,6 +85,33 @@ export default {
 <style lang="scss">
 @import "@/assets/css/base-variable.scss";
 @import "@/assets/css/markdown.scss";
+
+.home.container{
+  // override 描述中的标题字体
+  .markdown-body h1 {
+    font-size: 20px;
+  }
+
+  .markdown-body h2 {
+    font-size: 18px;
+  }
+
+  .markdown-body h3 {
+    font-size: 16px;
+  }
+
+  .markdown-body h4 {
+    font-size: 14px;
+  }
+
+  .markdown-body h5 {
+    font-size: 12px;
+  }
+
+  .markdown-body h6 {
+    font-size: 11px;
+  }
+}
 
 div.nuxt-link {
   float: left;
