@@ -1,9 +1,8 @@
 const urlMap = require('./static/url-map.json');
 const webpack = require('webpack')
 const path = require('path');
-const { Remarkable } = require('remarkable');
 import hljs from 'highlight.js'
-const md = new Remarkable('full', {
+var md = require('markdown-it')({
   html: true,
   xhtmlOut: false,
   breaks: true,
@@ -23,7 +22,7 @@ const md = new Remarkable('full', {
 
     return ''; // use external default escaping
   }
-});
+})
 
 
 module.exports = {

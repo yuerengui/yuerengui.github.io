@@ -60,10 +60,18 @@ export default {
         for(let i = 0; i < vm.post_id_array.length; i++) {
           let id = vm.post_id_array[i]
           let mdContent =  await import(`~/static/posts/${id}.md`);
+          // 处理 description
           let oDiv = document.createElement('div')
           oDiv.innerHTML = mdContent.html
           $(oDiv).find('more').parent().nextAll().remove()
           $(oDiv).addClass('markdown-body')
+
+          // 处理图片
+          let imageList = $(oDiv).find('img')
+          $(oDiv).find('img').parent('p').remove()
+          let imageContainer = $('<div class="image_container"></div>')
+          imageContainer = imageContainer.append(imageList)
+          $(oDiv).prepend(imageContainer)
           let item = {
             id: id,
             detail: oDiv.outerHTML,
@@ -111,6 +119,22 @@ export default {
   .markdown-body h6 {
     font-size: 11px;
   }
+  .markdown-body .image_container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 10px;
+    img{
+      max-height: 300px;
+      height: 300px;
+      width: 33%;
+      padding-right: 10px;
+      object-fit: cover;
+      &:last-child() {
+        padding-right: 0px;
+      }
+    }
+  }
 }
 
 div.nuxt-link {
@@ -142,10 +166,6 @@ div.nuxt-link {
       padding-bottom: 10px;
       padding-right: 10px;
       width: 100%;
-    }
-    img {
-      float: right;
-      height: 150px;
     }
   }
   p.bottom {
