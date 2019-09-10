@@ -49,7 +49,7 @@ div.content{
   border:1px solid #eeeeee;
   margin-bottom: 20px;
   overflow: hidden;
-  color: $articleFontSize;
+  color: $articleColor;
 }
 </style>
 
