@@ -139,7 +139,7 @@ export default {
       padding-right: 10px;
       object-fit: cover;
       margin-top: 10px;
-      &:last-child() {
+      &:nth-of-type(3n) {
         padding-right: 0px;
       }
     }
@@ -176,7 +176,6 @@ div.nuxt-link {
       line-height: 25px;
       box-sizing: border-box;
       padding-bottom: 10px;
-      padding-right: 10px;
       width: 100%;
     }
   }

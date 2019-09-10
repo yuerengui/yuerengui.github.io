@@ -1,29 +1,5 @@
 const urlMap = require('./static/url-map.json');
-const webpack = require('webpack')
 const path = require('path');
-import hljs from 'highlight.js'
-
-var md = require('markdown-it')({
-  html: true,
-  xhtmlOut: false,
-  breaks: true,
-  langPrefix: 'language-',
-  linkify: true,
-  linkTarget: '',
-  quotes: '“”‘’',
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value;
-      } catch (err) {}
-    }
-    try {
-      return hljs.highlightAuto(str).value;
-    } catch (err) {}
-
-    return ''; // use external default escaping
-  }
-})
 
 
 module.exports = {
@@ -87,13 +63,11 @@ module.exports = {
     extend (config, { isDev, isClient }) {
       config.module.rules.push({
         test: /\.md$/,
-        loader: 'frontmatter-markdown-loader',
-        include: path.resolve(__dirname, 'static'),
-        options: {
-          markdown: (body) => {
-            return md.render(body)
+        use: [
+          {
+            loader: path.resolve(__dirname, 'webpack/markdown-loader/markdown-loader.js')
           }
-        }
+        ]
       })
     }
   },

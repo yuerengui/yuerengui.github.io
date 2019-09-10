@@ -21,9 +21,9 @@
             </a>
           </li>
         </ul>
-        <a href="https://github.com/yuerengui/yuerengui.github.io" class="fork">
+        <!-- <a href="https://github.com/yuerengui/yuerengui.github.io" class="fork">
           <img src="/images/fork.svg" alt="" style="position: absolute;right: 0px;top: 0px;">
-        </a>
+        </a> -->
       </div>
     </div>
   </header>
