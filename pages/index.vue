@@ -9,13 +9,13 @@
           :to="'/posts/'+post.id"
           :key="post.id"
           v-for="post in posts">
-          <h2 class="article-title">{{post.attributes.title}}</h2>
+          <h2 class="article-title" v-if="post.attributes.title">{{post.attributes.title}}</h2>
           <div class="content-item" >
-            <div class="description markdown-body" v-html="post.description"></div>
+            <div class="description markdown-body" v-html="post.description" v-if="post.description"></div>
           </div>
           <p class="bottom">
             <span class="bottom_left">
-              <span class="time">
+              <span class="time" v-if="post.attributes.date">
                 <i class="el-icon-date"></i>
                 {{$moment().calendar(post.attributes.date)}}
               </span>

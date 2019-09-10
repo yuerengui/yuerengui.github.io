@@ -2,9 +2,9 @@
   <div class="container detail">
     <transition name="fade">
       <header v-if="!loading">
-        <h1 class="title">{{attributes.title}}</h1>
+        <h1 class="title" v-if="attributes.title">{{attributes.title}}</h1>
         <p class="bottom">
-          <span class="time">发布于: {{$moment().calendar(attributes.date)}}</span>
+          <span class="time" v-if="attributes.date">发布于: {{$moment().calendar(attributes.date)}}</span>
           <el-tag v-for="(tag, index) in attributes.tags" :key="index" size="mini">{{tag}}</el-tag>
         </p>
         <nuxt-link class="return" to="/">
@@ -14,9 +14,9 @@
     </transition>
     <transition name="fade">
       <div class="main" v-if="!loading">
-        <div v-html="post" class="content markdown-body"></div>
+        <div v-html="post" class="content markdown-body" v-if="post"></div>
         <div class="copyright">
-          <p class="title">文章名：{{attributes.title}}</p>
+          <p class="title" v-if="attributes.title">文章名：{{attributes.title}}</p>
           <p class="copyright">
             版权声明：
             <a href="javascript:;">署名-非商业使用-禁止演绎 3.0 国际</a>
