@@ -1,4 +1,4 @@
-const urlMap = require('./static/url-map.json');
+const urlMap = require('./content/url-map.json');
 const path = require('path');
 
 

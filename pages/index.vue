@@ -10,8 +10,8 @@
           :key="post.id"
           v-for="post in posts">
           <h2 class="article-title">{{post.attributes.title}}</h2>
-          <div class="content-item">
-            <p class="description" v-html="post.detail"></p>
+          <div class="content-item" >
+            <div class="description markdown-body" v-html="post.description"></div>
           </div>
           <p class="bottom">
             <span class="bottom_left">
@@ -60,27 +60,10 @@ export default {
         let posts = []
         for(let i = 0; i < vm.post_id_array.length; i++) {
           let id = vm.post_id_array[i]
-          let mdContent =  await import(`~/static/posts/${id}.md`);
-          // 处理 description
-          let oDiv = document.createElement('div')
-          oDiv.innerHTML = mdContent.html
-          $(oDiv).find('more').parent().nextAll().remove()
-          $(oDiv).addClass('markdown-body')
-
-          // 处理图片
-          let imageList = $(oDiv).find('img')
-          if(imageList.length > 0) {
-            $(oDiv).find('img').parent('p').remove()
-            let imageContainer = $('<div class="image_container"></div>')
-            imageContainer = imageContainer.append(imageList)
-            imageContainer = imageContainer.append('<span></span>')
-            imageContainer = imageContainer.append('<span></span>')
-            $(oDiv).prepend(imageContainer)
-          }
-          
+          let mdContent =  await import(`~/content/posts/${id}.md`);
           let item = {
             id: id,
-            detail: oDiv.outerHTML,
+            description: mdContent.description,
             attributes: mdContent.attributes
           }
           posts.push(item)
@@ -127,26 +110,90 @@ export default {
     font-size: 11px;
   }
   .markdown-body .image_container{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     padding-bottom: 10px;
-    flex-wrap: wrap;
-    img{
-      max-height: 300px;
-      height: 300px;
-      width: 33%;
-      padding-right: 10px;
-      object-fit: cover;
-      margin-top: 10px;
-      &:nth-of-type(3n) {
-        padding-right: 0px;
+    .images{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      img{
+        object-fit: cover;
+        width: 100%;
+        height: 400px;
       }
     }
-    span{
-      width: 33%;
+  }
+  .markdown-body  .images_2 {
+    display: flex;
+    flex-direction: column;
+    .images{
+      img{
+        width: 49%;
+        height: 400px;
+      }
     }
   }
+  .markdown-body .images_3{
+     .images{
+       img{
+        width: 33%;
+        height: 300px;
+      }
+     }
+  }
+  .markdown-body  .images_4{
+    display: flex;
+    flex-direction: column;
+    .images{
+      img{
+        width: 49%;
+        height: 300px;
+      }
+    }
+  }
+  .markdown-body  .images_4{
+    .images:nth-of-type(1){
+      margin-bottom: 10px;
+    }
+  }
+  .markdown-body  .images_5{
+    .images{
+      img{
+        width: 49%;
+        height: 300px;
+        margin-bottom: 10px;
+      }
+      &:nth-of-type(1) {
+        img{
+          width: 100%;
+          height: 400px;
+          margin-bottom: 10px;
+        }
+      }
+      &:nth-of-type(3) {
+        img{
+          margin-bottom: 0px;
+        }
+      }
+    }
+  }
+  .markdown-body  .images_6{
+    display: flex;
+    flex-direction: column;
+    .images{
+      img{
+        width: 49%;
+        height: 300px;
+      }
+    }
+  }
+  .markdown-body  .images_6{
+    .images:nth-of-type(1){
+      margin-bottom: 10px;
+    }
+    .images:nth-of-type(2){
+      margin-bottom: 10px;
+    }
+  }  
 }
 
 div.nuxt-link {
@@ -170,7 +217,7 @@ div.nuxt-link {
     overflow: hidden;
     display: flex;
     justify-content: flex-start;
-    p.description {
+    div.description {
       color: $articleColor;
       font-size: 16px;
       line-height: 25px;
@@ -180,7 +227,6 @@ div.nuxt-link {
     }
   }
   p.bottom {
-    padding-top: 10px;
     display: flex;
     justify-content: space-between;
     .bottom_left{

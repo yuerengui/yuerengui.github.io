@@ -1,4 +1,4 @@
-import post_id_array from '../static/url-map.json';
+import post_id_array from '../content/url-map.json';
 
 export const state = () => ({
   post_id_array: [],

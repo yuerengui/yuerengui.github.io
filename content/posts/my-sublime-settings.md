@@ -40,8 +40,6 @@ Arguments:
 ...
 ```
 
-<!-- more -->
-
 # 安装Package Control
 
 呼出控制台,把下面代码复制进去，回车

@@ -15,7 +15,7 @@
 <script>
 import customHeader from "~/components/header/header";
 import customFooter from "~/components/footer/footer";
-import about from '~/static/pages/about.md'
+import about from '~/content/pages/about.md'
 
 export default {
   data() {

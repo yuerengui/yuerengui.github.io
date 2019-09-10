@@ -55,7 +55,7 @@ export default {
     if (process.client) {
       next(async vm => {
         vm.$nuxt.$loading.start()
-        const post = await import(`~/static/posts/${to.params.id}.md`);
+        const post = await import(`~/content/posts/${to.params.id}.md`);
         vm.attributes = post.attributes;
         vm.post = post.html;
         vm.loading = false;
